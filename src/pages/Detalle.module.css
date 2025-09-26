@@ -1,0 +1,30 @@
+.detalleContainer {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1rem;
+  background-color: #1f2937;
+  color: #e5e7eb;
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.imagen {
+  width: 100%;
+  max-height: 250px;     /* limita la altura máxima */
+  height: auto;          /* deja que escale */
+  object-fit: contain;   /* contiene la imagen completa sin recortar */
+  background-color: #111827; /* color de fondo detrás de imagen pequeña */
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+
+.titulo {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.descripcion {
+  font-size: 1rem;
+  color: #d1d5db;
+}
