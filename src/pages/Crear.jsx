@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import styles from './Crear.module.css';
-import { useNavigate } from 'react-router-dom'; // ✅ Importar useNavigate
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 export default function Crear() {
   const [nombre, setNombre] = useState('');
@@ -10,7 +10,7 @@ export default function Crear() {
   const [imagen, setImagen] = useState('');
   const [precio, setPrecio] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const navigate = useNavigate(); // ✅ Hook para redirigir
+  const navigate = useNavigate(); // Hook para redirigir
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,10 +30,8 @@ export default function Crear() {
       setImagen('');
       setPrecio('');
 
-      // ✅ Redirigir al inicio después de 1 segundo
-      setTimeout(() => {
-        navigate('/'); // Cambiar '/' por la ruta de tu página de inicio si es diferente
-      }, 1000);
+      // Redirigir inmediatamente al componente Inicio
+      navigate('/'); // Cambiar '/' si tu ruta de inicio es diferente
     } catch (error) {
       console.error('Error creando libro:', error);
       setMensaje('❌ Error al crear libro');

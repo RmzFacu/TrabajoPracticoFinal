@@ -2,18 +2,18 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig"; // Ajusta según tu configuración de Firebase
-import styles from "./Detalle.module.css"; // Crea tu CSS Module para detalle
+import { db } from "../firebaseConfig"; 
+import styles from "./Detalle.module.css"; 
 
 export default function Detalle() {
-  const { id } = useParams(); // Obtenemos el id de la URL
+  const { id } = useParams(); 
   const [libro, setLibro] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function fetchLibro() {
       try {
-        const docRef = doc(db, "libros", id); // Referencia al documento específico
+        const docRef = doc(db, "libros", id);
         const docSnap = await getDoc(docRef);
 
         if (docSnap.exists()) {
@@ -41,6 +41,10 @@ export default function Detalle() {
       )}
       <h1 className={styles.titulo}>{libro.nombre}</h1>
       <p className={styles.descripcion}>{libro.detalle}</p>
+      {/* Mostrar precio */}
+      {libro.precio !== undefined && (
+        <p className={styles.precio}>Precio: ${libro.precio.toFixed(2)}</p>
+      )}
     </div>
   );
 }
