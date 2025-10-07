@@ -1,16 +1,16 @@
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
   padding: 1rem;
 }
 
 .card {
-  background-color: #1f2937;
+  background-color: #1f2937; /* gris oscuro */
   color: #e5e7eb;
   border-radius: 0.5rem;
   padding: 0.75rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
@@ -18,25 +18,27 @@
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 .link {
   text-decoration: none;
   color: inherit;
+  flex: 1;
 }
 
 .imagen {
   width: 100%;
-  height: 100px;
+  height: 120px;
   object-fit: cover;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
 }
 
 .titulo {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   margin-bottom: 0.25rem;
 }
 
@@ -48,6 +50,15 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 0.5rem;
+}
+
+/* Precio destacado */
+.precio {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #10b981; /* verde llamativo */
+  margin-bottom: 0.5rem;
 }
 
 /* --- Botones --- */

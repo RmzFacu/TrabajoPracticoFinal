@@ -1,28 +1,39 @@
-// Crear.jsx
 import React, { useState } from 'react';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../firebaseConfig';
 import styles from './Crear.module.css';
+import { useNavigate } from 'react-router-dom'; // ✅ Importar useNavigate
 
 export default function Crear() {
   const [nombre, setNombre] = useState('');
   const [detalle, setDetalle] = useState('');
   const [imagen, setImagen] = useState('');
+  const [precio, setPrecio] = useState('');
   const [mensaje, setMensaje] = useState('');
+  const navigate = useNavigate(); // ✅ Hook para redirigir
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      const precioNum = precio ? parseFloat(precio) : 0;
+
       const docRef = await addDoc(collection(db, 'libros'), {
         nombre,
         detalle,
-        imagen
+        imagen,
+        precio: precioNum,
       });
 
       setMensaje(`✅ Libro creado con ID: ${docRef.id}`);
       setNombre('');
       setDetalle('');
       setImagen('');
+      setPrecio('');
+
+      // ✅ Redirigir al inicio después de 1 segundo
+      setTimeout(() => {
+        navigate('/'); // Cambiar '/' por la ruta de tu página de inicio si es diferente
+      }, 1000);
     } catch (error) {
       console.error('Error creando libro:', error);
       setMensaje('❌ Error al crear libro');
@@ -31,7 +42,7 @@ export default function Crear() {
 
   return (
     <div className={styles.contenedor}>
-      <h2 className={styles.titulo}>Crear libro</h2>
+      <h2 className={styles.titulo}>Introducir Producto</h2>
 
       <form onSubmit={handleSubmit} className={styles.formulario}>
         <div className={styles.grupo}>
@@ -41,7 +52,7 @@ export default function Crear() {
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
             className={styles.input}
-            placeholder="Nombre del libro"
+            placeholder="Nombre del Producto"
             required
           />
         </div>
@@ -52,7 +63,7 @@ export default function Crear() {
             value={detalle}
             onChange={(e) => setDetalle(e.target.value)}
             className={styles.textarea}
-            placeholder="Descripción o detalles del libro"
+            placeholder="Descripcion del producto"
             required
           />
         </div>
@@ -68,7 +79,20 @@ export default function Crear() {
           />
         </div>
 
-        {/* Vista previa */}
+        <div className={styles.grupo}>
+          <label className={styles.label}>Precio</label>
+          <input
+            type="number"
+            value={precio}
+            onChange={(e) => setPrecio(e.target.value)}
+            className={styles.input}
+            placeholder="0.00"
+            min="0"
+            step="0.01"
+            required
+          />
+        </div>
+
         {imagen && (
           <div className={styles.vistaPrevia}>
             <p>Vista previa:</p>
@@ -77,7 +101,6 @@ export default function Crear() {
               alt="Vista previa"
               className={styles.imagenPrevia}
               onError={(e) => {
-                // si la URL no carga imagen mostramos fallback
                 e.target.src =
                   'https://via.placeholder.com/250x150.png?text=No+disponible';
               }}

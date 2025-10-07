@@ -1,75 +1,131 @@
+/* Paleta de Colores Musgo */
+:root {
+  --moss-green-dark: #58694E; /* Verde Musgo Oscuro para el fondo */
+  --moss-green-light: #A4B494; /* Verde Musgo Claro para acentos */
+  --light-text: #F8F8F8; /* Texto casi blanco */
+  --accent-color: #DDE2C6; /* Color muy claro para hover/activo */
+}
+
 .navbar {
-  background-color: #1f2937; 
-  color: #e5e7eb;           
-  padding: 1rem 0;
+  /* Fondo verde musgo oscuro con una ligera elevación */
+  background-color: var(--moss-green-dark); 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  padding: 1rem 0; 
+  position: sticky; 
+  top: 0;
+  z-index: 1000;
 }
 
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
+/* --- Estilos del Logo --- */
 .logo {
   display: flex;
   align-items: center;
-  font-size: 1.25rem;
-  font-weight: bold;
-  color: inherit;
+  font-size: 1.6rem; 
+  font-weight: 600; 
+  color: var(--accent-color); /* Logo en color claro */
   text-decoration: none; 
-  cursor: pointer; 
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
 }
 
-
-.logo img {
-  width: 60px;              
-  height: 60px;
-  object-fit: contain;      
-  margin-left: -10px;       
-  border-radius: 0.25rem;   
+.logo:hover {
+  color: var(--light-text);
 }
 
+.logoImg {
+  width: 45px;
+  height: 45px;
+  object-fit: contain;
+  margin-right: 0.75rem; 
+  /* Estilo para que el logo se integre mejor: */
+  border-radius: 4px;
+  background-color: rgba(255, 255, 255, 0.1); 
+  padding: 3px;
+}
+
+/* --- Estilos de los Enlaces --- */
 .links {
   list-style: none;
   display: flex;
-  gap: 1rem;
+  gap: 2.5rem; /* Más espacio para un look más limpio */
   margin: 0;
   padding: 0;
 }
 
 .links li a {
-  color: inherit;
+  color: var(--moss-green-light); /* Enlaces en verde musgo claro */
   text-decoration: none;
-  font-size: 0.875rem;
+  font-size: 1rem; 
+  padding: 0.25rem 0;
+  position: relative;
   transition: color 0.3s ease;
 }
 
-.links li a:hover {
-  color: #ffffff;
+/* Efecto de Subrayado Dinámico */
+.links li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px; /* Posición debajo del texto */
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--accent-color); /* El subrayado es de color claro */
+    transform: scaleX(0); /* Inicialmente oculto (sin ancho) */
+    transform-origin: bottom right;
+    transition: transform 0.3s ease-out;
 }
 
-@media (max-width: 640px) {
+.links li a:hover {
+  color: var(--accent-color); /* Color de texto claro al pasar el ratón */
+}
+
+.links li a:hover::after {
+    transform: scaleX(1); /* Muestra el subrayado completamente */
+    transform-origin: bottom left;
+}
+
+/* --- Media Queries (Adaptabilidad a Móviles) --- */
+@media (max-width: 768px) { 
   .container {
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start; /* Alineamos a la izquierda en móvil */
+    padding: 0 1rem;
+  }
+  
+  .logo {
+      margin-bottom: 0.5rem;
   }
 
   .links {
     flex-direction: column;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
+    width: 100%; 
+    gap: 0;
+    /* Estilos para lista desplegable simple en móvil */
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 0.5rem 0;
   }
 
-  .logo img {
-    width: 40px;
-    height: 40px;
-    margin-left: 0;
+  .links li a {
+    display: block; 
+    padding: 0.75rem 1rem; 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-
-  .logo {
-    font-size: 1.25rem;
+  
+  .links li a::after {
+      /* Desactivamos el subrayado animado en móvil para simplicidad */
+      display: none;
+  }
+  
+  .links li a:hover {
+      background-color: rgba(0, 0, 0, 0.2);
   }
 }

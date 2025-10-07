@@ -1,75 +1,138 @@
+
+:root {
+  --moss-green-dark: #58694E;
+  --moss-green-light: #A4B494;
+  --accent-color: #000000; /* todo en negro */
+}
+
+/* Contenedor principal */
 .contenedor {
-  max-width: 600px;
+  max-width: 700px;
   margin: 2rem auto;
-  padding: 1rem;
-  background-color: #1f2937; /* gris oscuro */
-  color: #e5e7eb;            /* texto claro */
-  border-radius: 0.5rem;
+  padding: 2rem;
+  background-color: var(--moss-green-dark);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  color: #000000; /* texto negro */
+  font-family: 'Arial', sans-serif;
 }
 
+/* Título del formulario */
 .titulo {
-  font-size: 1.5rem;
-  margin-bottom: 1rem;
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
   text-align: center;
+  color: #000000; /* negro */
 }
 
+/* Formulario */
 .formulario {
   display: flex;
   flex-direction: column;
   gap: 1rem;
 }
 
+/* Grupos de inputs */
 .grupo {
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
+/* Labels */
 .label {
-  margin-bottom: 0.25rem;
-  font-size: 0.9rem;
-  color: #d1d5db; /* texto más suave */
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #000000; /* negro */
 }
 
+/* Inputs y Textareas */
 .input,
 .textarea {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 0.5rem;
-  background-color: #374151; /* gris intermedio */
-  color: #e5e7eb;
+  padding: 0.6rem 1rem;
+  border-radius: 6px;
+  border: 1px solid #000000; /* borde negro */
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #000000; /* texto negro */
   font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+/* Placeholder en negro */
+.input::placeholder,
+.textarea::placeholder {
+  color: #000000; /* negro */
+  opacity: 1; /* para que se vea más oscuro */
 }
 
 .input:focus,
 .textarea:focus {
-  outline: 2px solid #3b82f6; /* azul en focus */
+  border-color: #000000; /* negro al focus */
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
+/* Textarea específico */
 .textarea {
   resize: vertical;
   min-height: 100px;
 }
 
+/* Botón */
 .boton {
-  background-color: #3b82f6; /* azul */
-  color: #fff;
+  background-color: #A4B494; /* verde musgo claro */
+  color: #000000; /* texto negro */
+  font-weight: 600;
   padding: 0.75rem;
   border: none;
-  border-radius: 0.5rem;
-  font-size: 1rem;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
 }
 
 .boton:hover {
-  background-color: #2563eb;
+  background-color: #000000; /* fondo negro al hover */
+  color: #A4B494; /* texto verde musgo claro al hover */
   transform: translateY(-2px);
 }
 
+/* Mensaje de éxito/error */
 .mensaje {
   margin-top: 1rem;
+  font-weight: 500;
   text-align: center;
-  font-size: 0.9rem;
-  color: #d1d5db;
+  color: #000000; /* negro */
+}
+
+/* Vista previa de la imagen */
+.vistaPrevia {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.vistaPrevia p {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #000000; /* negro */
+}
+
+.imagenPrevia {
+  max-width: 100%;
+  max-height: 250px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  object-fit: cover;
+}
+
+/* Media Queries para móvil */
+@media (max-width: 768px) {
+  .contenedor {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .titulo {
+    font-size: 1.5rem;
+  }
 }

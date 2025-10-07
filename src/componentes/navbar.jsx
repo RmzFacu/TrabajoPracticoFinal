@@ -8,11 +8,6 @@ export default function Navbar() {
   return (
     <nav className={styles.navbar}>
       <div className={styles.container}>
-        {/* logo con imagen que lleva al inicio */}
-        <Link to="/" className={styles.logo}>
-          <img src={logo} alt="Logo" className={styles.logoImg} />
-          BooksLib
-        </Link>
 
         <ul className={styles.links}>
           <li><Link to="/">Inicio</Link></li>
@@ -21,4 +16,4 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};

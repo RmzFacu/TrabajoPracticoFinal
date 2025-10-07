@@ -6,7 +6,7 @@ import { Link, useNavigate } from "react-router-dom";
 export default function Inicio() {
   const [libros, setLibros] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); // para redirigir a EditarLibro
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchLibros() {
@@ -25,13 +25,8 @@ export default function Inicio() {
     }
   }
 
-  if (loading) {
-    return <p style={{ padding: "1rem" }}>Cargando libros...</p>;
-  }
-
-  if (!loading && libros.length === 0) {
-    return <p style={{ padding: "1rem" }}>No hay ningún libro disponible.</p>;
-  }
+  if (loading) return <p style={{ padding: "1rem" }}>Cargando Productos...</p>;
+  if (!loading && libros.length === 0) return <p style={{ padding: "1rem" }}>No hay ningún producto disponible.</p>;
 
   return (
     <div className={styles.grid}>
@@ -43,25 +38,19 @@ export default function Inicio() {
                 src={libro.imagen}
                 alt={libro.nombre}
                 className={styles.imagen}
+                onError={(e) => e.target.src = "https://via.placeholder.com/180x120.png?text=No+disponible"}
               />
             )}
             <h2 className={styles.titulo}>{libro.nombre}</h2>
             <p className={styles.detalle}>{libro.detalle}</p>
+            {libro.precio !== undefined && (
+              <p className={styles.precio}>${libro.precio.toFixed(2)}</p>
+            )}
           </Link>
 
           <div className={styles.botones}>
-            <button
-              className={styles.botonEliminar}
-              onClick={() => handleEliminar(libro.id)}
-            >
-              Eliminar
-            </button>
-            <button
-              className={styles.botonEditar}
-              onClick={() => navigate(`/editar/${libro.id}`)} // redirige a EditarLibro
-            >
-              Editar
-            </button>
+            <button className={styles.botonEliminar} onClick={() => handleEliminar(libro.id)}>Eliminar</button>
+            <button className={styles.botonEditar} onClick={() => navigate(`/editar/${libro.id}`)}>Editar</button>
           </div>
         </div>
       ))}

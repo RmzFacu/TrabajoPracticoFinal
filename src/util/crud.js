@@ -1,12 +1,14 @@
 import { collection, addDoc, getDoc, getDocs, updateDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../firebaseConfig";
 
-export async function crearLibro(nombre, detalle, imagen) {
+// Crear libro con precio
+export async function crearLibro(nombre, detalle, imagen, precio = 0) {
   try {
     const docRef = await addDoc(collection(db, "libros"), {
-      nombre: nombre,
-      detalle: detalle,
-      imagen: imagen // 👈 nuevo campo
+      nombre,
+      detalle,
+      imagen,
+      precio, // nuevo campo
     });
     console.log("Documento creado con ID:", docRef.id);
     return docRef.id;
@@ -16,8 +18,7 @@ export async function crearLibro(nombre, detalle, imagen) {
   }
 }
 
-
-// Corregido: usar getDocs para colecciones
+// Obtener todos los libros
 export async function obtenerLibros() {
   try {
     const querySnapshot = await getDocs(collection(db, "libros"));
@@ -25,20 +26,21 @@ export async function obtenerLibros() {
     querySnapshot.forEach((doc) => {
       libros.push({ id: doc.id, ...doc.data() });
     });
-    return libros; // <-- aquí devolvemos el array
+    return libros;
   } catch (error) {
     console.error("Error obteniendo libros:", error);
-    return []; // devolver array vacío si hay error
+    return [];
   }
 }
 
+// Obtener libro por ID
 export async function obtenerLibroPorID(id) {
   try {
     const docRef = doc(db, "libros", id);
     const docSnap = await getDoc(docRef);
 
     if (docSnap.exists()) {
-      return { id: docSnap.id, ...docSnap.data() }; // <-- devolver datos
+      return { id: docSnap.id, ...docSnap.data() };
     } else {
       console.log("No existe el libro");
       return null;
@@ -49,17 +51,18 @@ export async function obtenerLibroPorID(id) {
   }
 }
 
-
+// Actualizar libro incluyendo precio
 export async function actualizarLibro(id, datosActualizados) {
   try {
     const docRef = doc(db, "libros", id);
-    await updateDoc(docRef, datosActualizados); 
+    await updateDoc(docRef, datosActualizados);
     console.log("Libro actualizado");
   } catch (error) {
     console.error("Error actualizando libro:", error);
   }
 }
 
+// Eliminar libro
 export async function eliminarLibro(id) {
   try {
     const docRef = doc(db, "libros", id);
